@@ -44,7 +44,7 @@ data <- data^0.5
 write.csv(data, "Results/16s OTU_rootsign.csv") 
 
 
-#### Figure S1 Prokaryotic community composition 整理后画图的表格数据有出入 ####
+#### Figure S1 Prokaryotic community composition ####
 # Prokaryotic Abundance at phylum level
 OTU<-read.csv("Data/16s OTU_RA & taxa.csv", header=TRUE)
 Phylum = aggregate(x = OTU[, 8:227], by=list(OTU$Phylum), FUN='sum')
@@ -54,7 +54,7 @@ write.csv(Phylum, file = "Results/16s Phyla.csv")
 library(ggplot2)
 library(ggalluvial)
 
-taxon <- read.csv("Results/16s Phyla top14 for plot.csv", header=TRUE)   #不提供此表？
+taxon <- read.csv("Results/16s Phyla top14 for plot.csv", header=TRUE)  
 
 taxon <- data.frame(subset(taxon, Treatment=="CK"))    #Choose different treatments
 #taxon <- data.frame(subset(taxon, Treatment=="N"))    #Choose different treatments
@@ -281,7 +281,7 @@ library(dplyr)
 library(ggplot2)
 library(ggrepel)  #geom_text_repel
 library(dplyr)  #filter
-library(cowplot) #拼图
+library(cowplot) #鎷煎浘
 library(gridExtra) 
 # NMDS
 data <- read.csv("Results/16s OTU_rootsign_sort by time.csv", header=TRUE, row.names=1)
@@ -387,7 +387,7 @@ data <- read.csv("Results/ITS OTU_RA.csv", row.names = 1, header = T)
 data <- data^0.5
 write.csv(data,"Results/ITS OTU_rootsign.csv") 
 
-#### Figure S2 Fungal community composition 整理后画图的表格数据有出入 ####
+#### Figure S2 Fungal community composition  ####
 # Fungal Abundance at phylum level
 OTU<-read.csv("Data/ITS OTU_RA & taxa.csv", header=TRUE)
 Phylum = aggregate(x = OTU[, 9:228], by=list(OTU$Phylum), FUN='sum')
@@ -632,7 +632,7 @@ library(dplyr)
 library(ggplot2)
 library(ggrepel)  #geom_text_repel
 library(dplyr)  #filter
-library(cowplot) #拼图
+library(cowplot) #鎷煎浘
 library(gridExtra) 
 # NMDS
 data <- read.csv("Results/ITS OTU_rootsign_sort by time.csv", header=TRUE, row.names=1)
@@ -1019,7 +1019,7 @@ group.mantel(a1=201, a2=201, n=20)
 library(ggcor)
 library(ggplot2)
 
-upper <- read.csv("Results/ITS Mantel Test spearman matarix.csv", header = TRUE, row.names = 1)      #???这两张表怎么得到的没有体现 OK吗？
+upper <- read.csv("Results/ITS Mantel Test spearman matarix.csv", header = TRUE, row.names = 1)      
 lower <- read.csv("Results/16s Mantel Test spearman matarix.csv", header = TRUE, row.names = 1)
 
 cor_df <- cor_tbl(upper, extra.mat = list(lower = lower))
