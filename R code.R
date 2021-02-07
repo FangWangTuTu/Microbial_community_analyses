@@ -1,4 +1,3 @@
-
 #### Figure 1a Soil moisture content ####
 library(ggplot2) 
 library(patchwork)
@@ -14,8 +13,6 @@ a <- ggplot(data1, aes(x = Time, y = SMC, col = Time)) +
   labs(title = "Soil moisture content", tag = "a") +
   theme(plot.title = element_text(size = 15, colour = "black", hjust = 0.5, face = "bold")) 
 a
-
-
 
 
 #### Prokaryotic OTU Rarefaction ####
@@ -87,7 +84,6 @@ p1 <- ggplot(data = taxon, aes(x = Time, y = RA, alluvium = Taxon, stratum = Tax
   theme(plot.title = element_text(size = 20, colour = "black", hjust = 0, vjust = 0.5, face = "bold"))
 p1
  
-
 
 #### Figure 1b Prokaryotic community similarity_time series ####
 # Bray-Curtis dissimilarity
@@ -357,10 +353,6 @@ c <- ggplot(data = data) +
 c
  
 
-
-
-
-
 #### Fungal OTU Rarefaction ####
 library(vegan)
 data <- read.csv("Data/ITS_OTU.csv", header=TRUE, row.names=1)
@@ -429,8 +421,6 @@ p2 <- ggplot(data = taxon, aes(x = Time, y = RA, alluvium = Taxon, stratum = Tax
 p2
 
 
-
-
 #### Figure 1c Fungal community similarity_time series ####
 # Bray-Curtis dissimilarity
 library(vegan)
@@ -448,7 +438,6 @@ data <- read.csv("Results/ITS_Dissimilarity.csv", row.names = 1, header = T)
 data <- 1-data 
 write.csv(data,"Results/ITS_Similarity.csv")
 
-
 # Plot
 data3 <- read.csv("Results/ITS_Similarity Time series for plot.csv", header=TRUE, row.names=1)
 data3$Treatment <- factor(data3$Treatment, levels = c("CK", "N", "NPK", "NPKM", "NPK1.5M"))
@@ -463,8 +452,6 @@ c <- ggplot(data3, aes(x = Time, y = Similarity, col = Time)) +
   labs(title = "Fungal community", tag = "c") +
   theme(plot.title = element_text(size = 20, colour = "black", hjust = 0, vjust = 0.5, face = "bold"))
 c
-
-
 
 
 #### Figure S3def Fungal community similarity_time series & replication & treatment effects ####
@@ -541,12 +528,6 @@ wilcox.test(data$TSD, data$TED)
 wilcox.test(data$TSE, data$TEE) 
 
 
-
-
-
-
-
-
 #### Figure 2b Fungal community structure_Air-drying and archiving time series ####
 # NMDS
 library(vegan)
@@ -620,9 +601,6 @@ b <- ggplot(data = data) +
   annotation_custom(tbgrob2, xmin = -1.2, ymax = -0.4) +     
   annotation_custom(tbgrob3, xmin = 0.2, ymax = -0.3)     
 b
-
-
-
 
 
 #### Figure 2d Fungal community structure_Cryopreservation (T=0h) ####
@@ -706,10 +684,6 @@ c <- ggplot(data = data) +
   annotation_custom(tbgrob2, xmin = -1.2, ymax = -0.4) +     
   annotation_custom(tbgrob3, xmin = 0.2, ymax = -0.3)   
 c
-
-
-
-
 
 
 #### Figure 2e Prokaryotic and fungal community_Mantel test ####
