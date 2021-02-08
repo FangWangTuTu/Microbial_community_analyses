@@ -1,9 +1,9 @@
 #### Figure 1a Soil moisture content ####
 library(ggplot2) 
-data1 <- read.csv("Data/soil moisture content.csv", header=TRUE, row.names=1)
+data1 <- read.csv("Data/soil moisture content.csv", header = TRUE, row.names = 1)
 data1$Treatment <- factor(data1$Treatment, levels = c("CK", "N", "NPK", "NPKM", "NPK1.5M"))
 a <- ggplot(data1, aes(x = Time, y = SMC, col = Time)) +  
-  scale_color_gradient(low='blue', high='red') +
+  scale_color_gradient(low = 'blue', high = 'red') +
   geom_point(size = 0.8) +
   ylab("Soil moisture content (%)") +
   xlab("Air-drying and archiving time (h)") +
@@ -16,7 +16,7 @@ a
 
 #### Prokaryotic OTU Rarefaction ####
 library(vegan)
-data <- read.csv("Data/16s_OTU.csv", header=TRUE, row.names=1)
+data <- read.csv("Data/16s_OTU.csv", header = TRUE, row.names = 1)
 tdata <- t(data)
 write.csv(tdata, file='Results/16s OTU_t.csv')
 
@@ -106,13 +106,13 @@ library(ggplot2)
 data2 <- read.csv("Results/16s_Similarity Time series for plot.csv", header=TRUE, row.names=1)
 data2$Treatment <- factor(data2$Treatment, levels = c("CK", "N", "NPK", "NPKM", "NPK1.5M"))
 b <- ggplot(data2, aes(x = Time, y = Similarity, col = Time)) +   
-  scale_color_gradient(low='blue', high='red') +
+  scale_color_gradient(low = 'blue', high = 'red') +
   geom_point(size = 0.8) +
   ylab("Bray-Curtis similarity") +
   xlab("Air-drying and archiving time (h)") +
   theme(axis.title.x = element_blank()) + 
   theme(plot.title = element_text(size = 15, colour = "black", hjust = 0.5, face = "bold")) +
-  scale_y_continuous(limits=c(0.4, 0.8), breaks = c( 0.4, 0.6, 0.8), label = c("0.4", "0.6", "0.8")) + 
+  scale_y_continuous(limits = c(0.4, 0.8), breaks = c( 0.4, 0.6, 0.8), label = c("0.4", "0.6", "0.8")) + 
   facet_wrap(~ Treatment, ncol = 5) +
   labs(title = "Prokaryotic community", tag = "b")
   theme(plot.title = element_text(size = 20, colour = "black", hjust = 0, vjust = 0.5, face = "bold"))
@@ -121,7 +121,7 @@ b
 #### Figure S3abc Prokaryotic community similarity_time series & replication & treatment effects ####
 library(ggplot2) 
 # Prokaryotic community similarity_Air-drying and archiving time series
-data <- read.csv("Results/16s_Similarity Time series for plot.csv", header=TRUE, row.names=1)
+data <- read.csv("Results/16s_Similarity Time series for plot.csv", header = TRUE, row.names = 1)
 data$Treatment <- factor(data$Treatment, c("CK", "N", "NPK", "NPKM", "NPK1.5M"), ordered=TRUE)
 colour5 <- c("#F7FBFF", "#C6DBEF", "#9ECAE1", "#6BAED6", "#2171B5")
 a <- ggplot(data, aes(x = Treatment, y = Similarity, fill = Treatment)) +  
@@ -144,7 +144,7 @@ a
 data <- read.csv("Results/16s_Similarity replicate for plot.csv", header=TRUE, row.names=1)
 data$Treatment <- factor(data$Treatment, levels = c("CK", "N", "NPK", "NPKM", "NPK1.5M"))
 colour5 <- c("#F7FBFF", "#C6DBEF", "#9ECAE1", "#6BAED6", "#2171B5")
-data1 <- subset(data, Time=="0")   
+data1 <- subset(data, Time == "0")   
 b <- ggplot(data1, aes(x = Treatment, y = Similarity, fill = Treatment)) + 
   geom_boxplot() +
   geom_jitter(size = 1) +    
@@ -194,7 +194,7 @@ wilcox.test(data$TSE, data$TEE)
 #### Figure 2a Prokaryotic community structure_Air-drying and archiving time series ####
 # NMDS
 library(vegan)
-OTU <- read.csv("Results/16s OTU_rootsign.csv", header=TRUE, row.names=1)
+OTU <- read.csv("Results/16s OTU_rootsign.csv", header = TRUE, row.names = 1)
 tOTU <- t(OTU)
 
 set.seed(8888)  
@@ -209,10 +209,10 @@ write.csv(NMDS_scores, file="Results/16s NMDS Scores_Air-drying and archiving ti
 
 # PERMANOVA/ADONIS
 library(vegan)
-otu <- read.csv("Results/16s OTU_rootsign.csv", header=TRUE, row.names=1)
+otu <- read.csv("Results/16s OTU_rootsign.csv", header = TRUE, row.names = 1)
 otu <- data.frame(t(otu))  
 
-group <- read.csv('Data/groups.csv', header=TRUE, row.names=1)
+group <- read.csv('Data/groups.csv', header = TRUE, row.names = 1)
 
 set.seed(8888)
 adonis_result <- adonis(otu~Treatment, group, distance = 'bray', permutations = 2000)
@@ -230,9 +230,9 @@ names(otuput) <- c('', 'Df', 'Sums of squares', 'Mean squares', 'F.Model', 'Vari
 write.table(otuput, file = 'Results/16s PERMANOVA_Air-drying and archiving time series.csv', row.names = FALSE, sep = ",")
 
 # Plot
-data <- read.csv("Results/16s NMDS Scores_Air-drying and archiving time series for plot.csv", header=TRUE)
+data <- read.csv("Results/16s NMDS Scores_Air-drying and archiving time series for plot.csv", header = TRUE)
 
-data$Treatment <- factor(data$Treatment, c("CK", "N", "NPK", "NPKM", "NPK1.5M"), ordered=TRUE)
+data$Treatment <- factor(data$Treatment, c("CK", "N", "NPK", "NPKM", "NPK1.5M"), ordered = TRUE)
 
 library(gridExtra) 
 label1 <- c(paste("Air-drying and archiving time series"))
@@ -273,7 +273,7 @@ library(dplyr)
 library(ggrepel)   
 library(gridExtra) 
 # NMDS
-data <- read.csv("Results/16s OTU_rootsign_sort by time.csv", header=TRUE, row.names=1)
+data <- read.csv("Results/16s OTU_rootsign_sort by time.csv", header = TRUE, row.names = 1)
 #T=0h
 data0 <- data[, c(1:20)] 
 tOTU <- data.frame(t(data0))
@@ -294,7 +294,7 @@ data <- read.csv("Results/16s OTU_rootsign_sort by time.csv", header=TRUE, row.n
 data0 <- data[, c(1:20)] 
 tOTU <- data.frame(t(data0))
 
-group_all <- read.csv('Data/groups.csv', header=TRUE, row.names=1)
+group_all <- read.csv('Data/groups.csv', header = TRUE, row.names = 1)
 group <- dplyr::filter(group_all, Time == "0")
 
 set.seed(8888)
@@ -313,9 +313,9 @@ names(otuput) <- c('', 'Df', 'Sums of squares', 'Mean squares', 'F.Model', 'Vari
 write.table(otuput, file = 'Results/16s PERMANOVA_Cryopreservation (T=0h).csv', row.names = FALSE, sep = ",")
 
 # Plot
-data <- read.csv("Results/16s NMDS Scores_Cryopreservation (T=0h) for plot.csv", header=TRUE)
+data <- read.csv("Results/16s NMDS Scores_Cryopreservation (T=0h) for plot.csv", header = TRUE)
 
-data$Treatment <- factor(data$Treatment, c("CK", "N", "NPK", "NPKM", "NPK1.5M"), ordered=TRUE)
+data$Treatment <- factor(data$Treatment, c("CK", "N", "NPK", "NPKM", "NPK1.5M"), ordered = TRUE)
 
 library(gridExtra) 
 label1 <- c(paste("Time series"))
@@ -420,7 +420,7 @@ library(vegan)
 library(ggplot2)
 library(ggrepel)
 
-data <- read.csv("Results/ITS OTU_rootsign.csv", header=TRUE, row.names=1)
+data <- read.csv("Results/ITS OTU_rootsign.csv", header = TRUE, row.names = 1)
 data <- t(data)
 otu.bc <- vegdist(data, 'bray')                 
 write.csv(as.matrix(otu.bc), 'Results/ITS_Dissimilarity.csv')
@@ -439,7 +439,7 @@ c <- ggplot(data3, aes(x = Time, y = Similarity, col = Time)) +
   ylab("Bray-Curtis similarity") +
   xlab("Air-drying and archiving time (h)") +
   theme(plot.title = element_text(size = 15, colour = "black", hjust = 0.5, face = "bold")) +
-  scale_y_continuous(limits=c(0.4, 0.8), breaks = c( 0.4, 0.6, 0.8), label = c("0.4", "0.6", "0.8")) + 
+  scale_y_continuous(limits = c(0.4, 0.8), breaks = c( 0.4, 0.6, 0.8), label = c("0.4", "0.6", "0.8")) + 
   facet_wrap(~ Treatment, ncol = 5) +
   labs(title = "Fungal community", tag = "c") +
   theme(plot.title = element_text(size = 20, colour = "black", hjust = 0, vjust = 0.5, face = "bold"))
@@ -450,7 +450,7 @@ c
 library(ggplot2) 
 # Fungal community similarity_Air-drying and archiving time series
 data <- read.csv("Results/ITS_Similarity Time series for plot.csv", header = TRUE, row.names = 1)
-data$Treatment <- factor(data$Treatment, c("CK", "N", "NPK", "NPKM", "NPK1.5M"), ordered=TRUE)
+data$Treatment <- factor(data$Treatment, c("CK", "N", "NPK", "NPKM", "NPK1.5M"), ordered = TRUE)
 colour5 <- c("#F7FBFF", "#C6DBEF", "#9ECAE1", "#6BAED6", "#2171B5")
 d <- ggplot(data, aes(x = Treatment, y = Similarity, fill = Treatment)) + 
   geom_boxplot() +
@@ -511,7 +511,7 @@ f <- ggplot(data, aes(x = Treatment, y = Similarity, fill = Treatment)) +
 f
 
 # wilcox.test: to compare similarity of time series & treatment effects
-data <- read.csv("Results/ITS_Similarity for test.csv", header=TRUE, row.names=1)
+data <- read.csv("Results/ITS_Similarity for test.csv", header = TRUE, row.names = 1)
 wilcox.test(data$TSB, data$TEB) 
 wilcox.test(data$TSC, data$TEC) 
 wilcox.test(data$TSD, data$TED) 
@@ -521,7 +521,7 @@ wilcox.test(data$TSE, data$TEE)
 #### Figure 2b Fungal community structure_Air-drying and archiving time series ####
 # NMDS
 library(vegan)
-OTU <- read.csv("Results/ITS OTU_rootsign.csv", header=TRUE, row.names=1)
+OTU <- read.csv("Results/ITS OTU_rootsign.csv", header = TRUE, row.names = 1)
 tOTU <- t(OTU)
 
 set.seed(8888)  
@@ -621,7 +621,7 @@ data <- read.csv("Results/ITS OTU_rootsign_sort by time.csv", header = TRUE, row
 data0 <- data[, c(1:20)] 
 tOTU <- data.frame(t(data0))
 
-group_all <- read.csv('Data/groups.csv', header=TRUE, row.names=1)
+group_all <- read.csv('Data/groups.csv', header = TRUE, row.names = 1)
 group <- dplyr::filter(group_all, Time == "0")
 
 set.seed(8888)
@@ -682,7 +682,7 @@ group.mantel <- function(a1, a2, n){
   coresult.out <- data.frame()
   g1 <- mantel(1-vegdist(comm1[a1:(a1+n-1),], method = 'bray'),
                1-vegdist(comm1[a2:(a2+n-1),], method = 'bray'), 
-               method="spearman", permutations = 2000)
+               method = "spearman", permutations = 2000)
   coresult.out[1,1] <- a1
   coresult.out[1,2] <- (a1+n-1)
   coresult.out[1,3] <- a2
@@ -832,7 +832,7 @@ group.mantel <- function(a1, a2, n){
   coresult.out <- data.frame()
   g1 <- mantel(1-vegdist(comm1[a1:(a1+n-1),], method = 'bray'),
                1-vegdist(comm1[a2:(a2+n-1),], method = 'bray'), 
-               method="spearman", permutations = 2000)
+               method = "spearman", permutations = 2000)
   coresult.out[1,1] <- a1
   coresult.out[1,2] <- (a1+n-1)
   coresult.out[1,3] <- a2
